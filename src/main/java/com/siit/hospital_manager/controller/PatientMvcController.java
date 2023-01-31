@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,22 +26,25 @@ public class PatientMvcController {
         return "patient/viewAll";
     }
 
-    @PostMapping(value = "/submit")
-    public String createPatient(@Valid @ModelAttribute("createPatientDto") CreatePatientDto createPatientDto, BindingResult bindingResult, Model model){
+    @GetMapping("/create")
+    public String createPatientPage(Model model){
+        model.addAttribute("patient", CreatePatientDto.builder().build());
+        return "/patient/createPatient";
+    }
+
+    @PostMapping("/submitCreatePatientForm")
+    public String submitCreatePatientForm (@Valid CreatePatientDto createPatientDto, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             //return to error page if there are validation errors
-            return "validationError";
+            return "/validationError";
         }
-        patientService.createPatient(createPatientDto);
-        model.addAttribute("createPatientDto", createPatientDto);
-        return "success";
-    }
-    @GetMapping("/create")
-    public String showCreateForm(Model model) {
-        CreatePatientDto createPatientDto = new CreatePatientDto();
-
-        model.addAttribute("createPatientDto", createPatientDto);
-        return "patient/create";
+        try {
+            patientService.createPatient(createPatientDto);
+        }
+        catch (ResponseStatusException exception){
+           return "/entityExistsError";
+        }
+        return "redirect:/dashboard";
     }
 
 }

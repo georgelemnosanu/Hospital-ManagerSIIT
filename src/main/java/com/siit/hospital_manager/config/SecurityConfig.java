@@ -22,9 +22,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/public", "/api-docs/**", "/swagger-ui/**", "/actuator/**", "/patient/create", "/error", "/favicon.ico").permitAll()
+                .requestMatchers("/", "/public", "/api-docs/**", "/swagger-ui/**",
+                        "/actuator/**", "/mvc/patient/create", "/validationError.html", "/error",
+                        "/favicon.ico", "/mvc/patient/submitCreatePatientForm", "/entityExistsError.html").permitAll()
                 .requestMatchers("/dashboard/**", "/dashboard", "/appointment/**").hasAnyRole("PATIENT", "ADMIN")
                 .requestMatchers("/**").hasRole("ADMIN")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
                 .and()
                 .formLogin()
                 .and()
