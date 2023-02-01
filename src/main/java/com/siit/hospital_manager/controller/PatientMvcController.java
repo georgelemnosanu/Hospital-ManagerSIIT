@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -33,9 +34,8 @@ public class PatientMvcController {
     }
 
     @PostMapping("/submitCreatePatientForm")
-    public String submitCreatePatientForm (@Valid CreatePatientDto createPatientDto, BindingResult bindingResult){
+    public String submitCreatePatientForm (@Valid CreatePatientDto createPatientDto, BindingResult bindingResult , RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()) {
-            //return to error page if there are validation errors
             return "/validationError";
         }
         try {
@@ -44,7 +44,8 @@ public class PatientMvcController {
         catch (ResponseStatusException exception){
            return "/entityExistsError";
         }
-        return "redirect:/dashboard";
+        redirectAttributes.addFlashAttribute("successMessage", "Account created successfully");
+        return "redirect:/login";
     }
 
 }

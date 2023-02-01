@@ -15,23 +15,20 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web -> web.ignoring().requestMatchers("/", "/public"));
+        return (web -> web.ignoring().requestMatchers("/mvc/patient/create","/mvc/patient/submitCreatePatientForm","/loginCreatePatient"));
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/public", "/api-docs/**", "/swagger-ui/**",
-                        "/actuator/**", "/mvc/patient/create", "/validationError.html", "/error",
-                        "/favicon.ico", "/mvc/patient/submitCreatePatientForm", "/entityExistsError.html").permitAll()
-                .requestMatchers("/dashboard/**", "/dashboard", "/appointment/**").hasAnyRole("PATIENT", "ADMIN")
-                .requestMatchers("/**").hasRole("ADMIN")
-                .and()
-                .logout()
-                .logoutSuccessUrl("/")
+                .requestMatchers("/**")
+                .authenticated()
                 .and()
                 .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/default",true)
+                .permitAll()
                 .and()
                 .csrf().disable();
         return http.build();

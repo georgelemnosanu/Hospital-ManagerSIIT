@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+          crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/0b6a62f049.css" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/0b6a62f049.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<h1 class="h1" style="display: flex; justify-content: center; align-items: center;" >Create Patient</h1>
+<div class="container" style="display: flex; justify-content: center; align-items: center; height: 80vh">
+    <form  action="/mvc/patient/submitCreatePatientForm" method="post">
+        <div class="mb-3 w-100 p-3" style="">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <label class="form-label" style="text-align: center" for="username">Username:</label>
+            <input class="form-control" type="text" id="username" th:field="*{patient.userName}"/>
+        </div>
+        <div class="mb-3 w-100 p-3">
+            <i class="fa-solid fa-lock"></i>
+            <label class="form-label" style="text-align: center" for="password">Password:</label>
+            <input class="form-control" type="password" id="password" th:field="*{patient.password}"/>
+        </div>
+        <div class="mb-3 w-100 p-3">
+            <i class="fa-solid fa-hospital-user"></i>
+            <label class="form-label" style="text-align: center" for="name">Name:</label>
+            <input class="form-control" type="text" id="name" th:field="*{patient.name}"/>
+        </div>
+        <div class="mb-3 w-100 p-3">
+            <i class="fa-solid fa-cake-candles"></i>
+            <label class="form-label" style="text-align: center" for="patientAge">Age:</label>
+            <input class="form-control" type="number" id="patientAge" th:field="*{patient.age}"/>
+        </div>
+        <div class="mb-3 w-100 p-3">
+            <i class="fa-solid fa-phone"></i>
+            <label class="form-label" style="text-align: center" for="phoneNumber">PhoneNumber:</label>
+            <input class="form-control" type="number" id="phoneNumber" th:field="*{patient.phoneNumber}"/>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin: auto; display: block; width: 100%">Create Account</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>
