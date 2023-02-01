@@ -1,0 +1,91 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+
+<!--<head>-->
+<!--  <meta charset="utf-8" />-->
+<!--  <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--  <title>#1 HTML Login Form</title>-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"-->
+<!--        crossorigin="anonymous">-->
+<!--  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">-->
+<!--  <link rel="stylesheet" th:href="@{/static/index.css}">-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div id="form_wrapper">-->
+<!--  <div id="form_left">-->
+<!--    <img src="icon.png" alt="computer icon">-->
+<!--  </div>-->
+<!--  <div id="form_right">-->
+<!--    <h1>Member Login</h1>-->
+<!--    <div class="input_container">-->
+<!--      <i class="fas fa-envelope"></i>-->
+<!--      <input placeholder="Email" type="email" name="Email" id="field_email" class='input_field'>-->
+<!--    </div>-->
+<!--    <div class="input_container">-->
+<!--      <i class="fas fa-lock"></i>-->
+<!--      <input  placeholder="Password" type="password" name="Password" id="field_password" class='input_field'>-->
+<!--    </div>-->
+<!--    <input type="submit" value="Login" id='input_submit' class='input_field'>-->
+<!--    <span>Forgot <a href="#"> Username / Password ?</a></span>-->
+<!--    <span id='create_account'>-->
+<!--                <a href="#">Create your account &#x27A1; </a>-->
+<!--            </span>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</body>-->
+
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+          crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://kit.fontawesome.com/0b6a62f049.css" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/0b6a62f049.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div th:if="${successMessage}" class="alert alert-success text-center">
+  <p th:text="${successMessage}"></p>
+</div>
+<div class="bg" style="background-image: url('https://www.smartsheet.com/sites/default/files/ic-og-PatientManagement-FacebookLinkedIn.jpg'); background-size: cover; background-position: center center; height: 100vh; width: 100%;">
+  <div class="container h-150 d-flex align-items-center justify-content-center">
+    <form style="margin-top: 200px" class="card p-4" method="post" action="/login">
+      <div class="text-center mb-4">
+        <h1 class="display-4">Hospital Manager</h1>
+        <p class="lead">Please enter your credentials</p>
+      </div>
+      <div class="form-group">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+      </div>
+      <div class="form-group">
+        <i class="fa-solid fa-lock"></i>
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+      <div th:if="${param.error}" class="alert alert-danger text-center">
+        Invalid username or password.
+      </div>
+      <div class="d-flex">
+        <button type="submit"  style="margin: auto; display: block; width: 100%" class="btn btn-primary mx-2">Login</button>
+        <button class="btn btn-primary mx-2"  style="margin: auto; display: block; width: 100%" onclick="window.location.href='/mvc/patient/create';">
+          Create a new account
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
