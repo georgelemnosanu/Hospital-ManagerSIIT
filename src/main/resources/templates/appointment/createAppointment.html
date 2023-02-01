@@ -15,7 +15,7 @@
             <div class="mb-0 w-75 p-1">
                 <label class="form-label" for="doctor">Doctor:</label>
                 <select class="form-control" id="doctor" th:field="*{doctor}">
-                    <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="${doctor.name}"></option>
+                    <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="'Dr. ' +${doctor.name}"></option>
                 </select>
             </div>
             <div class="mb-0 w-75 p-1">
