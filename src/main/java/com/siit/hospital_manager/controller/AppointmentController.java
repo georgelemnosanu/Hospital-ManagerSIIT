@@ -1,12 +1,18 @@
 package com.siit.hospital_manager.controller;
 
+import com.siit.hospital_manager.model.Specialty;
 import com.siit.hospital_manager.model.dto.AppointmentDto;
+import com.siit.hospital_manager.model.dto.CreateAppointmentDto;
+import com.siit.hospital_manager.repository.SpecialtyRepository;
 import com.siit.hospital_manager.service.AppointmentService;
 import com.siit.hospital_manager.service.DoctorService;
+import com.siit.hospital_manager.service.PatientService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -20,6 +26,8 @@ public class AppointmentController {
 
     private final AppointmentService appointmentService;
     private final DoctorService doctorService;
+    private final PatientService patientService;
+    private final SpecialtyRepository specialtyRepository;
 
     @GetMapping("/findAllByPatient")
     public String findAllByPatient(Model model, Principal principal) {
@@ -35,10 +43,18 @@ public class AppointmentController {
          appointmentService.deleteAppointmentByIdAndPatient(id, principal.getName());
     }
 
-    @GetMapping("/create")
-    public String create(Model model, Principal principal) {
-        model.addAttribute("doctors", doctorService.findAll());
-        return "appointment/create";
+    @GetMapping("/create/{specialtyId}")
+    public String showCreateSpecialtyForm(@PathVariable Integer specialtyId, Model model) {
+        Specialty specialty = specialtyRepository.findById(specialtyId)
+                .orElseThrow(() -> new EntityNotFoundException("Specialty not found"));
+        model.addAttribute("doctors", doctorService.findAllBySpecialty(specialty));
+        model.addAttribute("appointment", CreateAppointmentDto.builder().build());
+        return "/appointment/createAppointment";
     }
 
+    @PostMapping("/submitCreateAppointmentForm")
+    public String submitCreateAppointmentForm(CreateAppointmentDto createAppointmentDto, BindingResult bindingResult) {
+        appointmentService.save(createAppointmentDto);
+        return "/appointment/appointmentCreatedSuccessfully";
+    }
 }

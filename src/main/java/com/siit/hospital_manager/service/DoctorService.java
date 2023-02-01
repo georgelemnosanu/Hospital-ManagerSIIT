@@ -2,6 +2,7 @@ package com.siit.hospital_manager.service;
 
 import com.siit.hospital_manager.exception.BusinessException;
 import com.siit.hospital_manager.model.Doctor;
+import com.siit.hospital_manager.model.Specialty;
 import com.siit.hospital_manager.model.dto.CreateDoctorDto;
 import com.siit.hospital_manager.model.dto.DoctorDto;
 import com.siit.hospital_manager.repository.DoctorRepository;
@@ -39,5 +40,9 @@ public class DoctorService {
         Doctor doctor = doctorRepository.findById(id).orElseThrow(
                 () -> new BusinessException(HttpStatus.NOT_FOUND, "Invalid doctor id"));
         doctorRepository.delete(doctor);
+    }
+
+    public List<Doctor> findAllBySpecialty(Specialty specialty) {
+        return doctorRepository.findAllBySpecialty(specialty);
     }
 }

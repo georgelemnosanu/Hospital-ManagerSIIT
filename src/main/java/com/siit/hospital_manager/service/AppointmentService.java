@@ -1,11 +1,14 @@
 package com.siit.hospital_manager.service;
 
+import com.siit.hospital_manager.config.MyUserDetails;
 import com.siit.hospital_manager.exception.BusinessException;
 import com.siit.hospital_manager.model.*;
 import com.siit.hospital_manager.model.dto.AppointmentDto;
+import com.siit.hospital_manager.model.dto.CreateAppointmentDto;
 import com.siit.hospital_manager.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,5 +64,19 @@ public class AppointmentService {
     public List<AppointmentDto> create(String name) {
 
         return null;
+    }
+
+    public void save(CreateAppointmentDto createAppointmentDto) {
+        MyUserDetails myUserDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Patient patient = patientRepository.findByUserName(myUserDetails.getUsername()).orElseThrow(
+                () -> new BusinessException(HttpStatus.NOT_FOUND, "Invalid patient id"));
+
+        Appointment appointment = Appointment.builder()
+                .patient(patient)
+                .date(createAppointmentDto.getDate())
+                .doctor(createAppointmentDto.getDoctor())
+                .build();
+
+        appointmentsRepository.save(appointment);
     }
 }
