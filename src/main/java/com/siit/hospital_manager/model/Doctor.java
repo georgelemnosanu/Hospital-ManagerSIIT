@@ -1,5 +1,6 @@
 package com.siit.hospital_manager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.siit.hospital_manager.model.dto.CreateDoctorDto;
 import com.siit.hospital_manager.model.dto.DoctorDto;
 import jakarta.persistence.*;
@@ -14,20 +15,25 @@ import java.util.List;
 @PrimaryKeyJoinColumn(referencedColumnName = "id")
 @SuperBuilder
 @NoArgsConstructor
+
 public class Doctor extends User{
+
     private String name;
-    private String specialisation;
+
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
-    List<Appointment> appointments;
+    @JsonIgnore
+    private List<Appointment> appointments;
 
+    @ManyToOne
+    private Specialty specialty;
 
     public DoctorDto toDto() {
         return DoctorDto
                 .builder()
                 .name(name)
                 .id(getId())
-                .specialisation(specialisation)
+                .specialty(specialty)
                 .build();
     }
 
@@ -36,10 +42,15 @@ public class Doctor extends User{
                 .builder()
                 .userName(createDoctorDto.getUserName())
                 .name(createDoctorDto.getName())
-                .specialisation(createDoctorDto.getSpecialisation())
+                .specialty(createDoctorDto.getSpecialty())
                 .password(createDoctorDto.getPassword())
                 .isActive(true)
                 .roles("ROLE_DOCTOR")
                 .build();
+    }
+
+    @Override
+    public String toString(){
+        return specialty.getName();
     }
 }

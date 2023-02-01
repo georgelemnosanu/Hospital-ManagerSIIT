@@ -6,6 +6,7 @@ import com.siit.hospital_manager.model.User;
 import com.siit.hospital_manager.model.dto.*;
 import com.siit.hospital_manager.repository.PatientRepository;
 import com.siit.hospital_manager.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -66,6 +67,11 @@ public class PatientService {
             patient.setAge(updatePatientDto.getAge());
         }
         patientRepository.save(patient);
+    }
+
+    public Patient findByUsername(String username) {
+        return patientRepository.findByUserName(username)
+                .orElseThrow(() -> new EntityNotFoundException("Patient not found"));
     }
 
     // same for delete

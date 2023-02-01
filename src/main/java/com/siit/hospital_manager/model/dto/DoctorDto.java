@@ -1,5 +1,6 @@
 package com.siit.hospital_manager.model.dto;
 
+import com.siit.hospital_manager.model.Specialty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,5 +10,5 @@ public class DoctorDto {
 
     private Integer id;
     private String name;
-    private String specialisation;
+    private Specialty specialty;
 }

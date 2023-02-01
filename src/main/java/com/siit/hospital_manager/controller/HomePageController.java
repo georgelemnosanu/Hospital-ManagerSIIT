@@ -1,21 +1,20 @@
 package com.siit.hospital_manager.controller;
 
+
+import com.siit.hospital_manager.service.SpecialtyService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import static com.siit.hospital_manager.util.AuthUtils.*;
 
 @Controller
+@RequiredArgsConstructor
 public class HomePageController {
+
+    private final SpecialtyService specialtyService;
 
     @GetMapping("/")
     public String homePage(Model model){
@@ -43,7 +42,8 @@ public class HomePageController {
 
 
     @GetMapping("/indexUser")
-    public String indexUser(){
+    public String indexUser(Model model){
+        model.addAttribute("specialties", specialtyService.findAll());
         return "indexUser";
     }
 
