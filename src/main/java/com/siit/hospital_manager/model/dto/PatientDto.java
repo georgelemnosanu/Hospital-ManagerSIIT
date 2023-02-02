@@ -27,9 +27,18 @@ public class PatientDto {
         this.age = age;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     private Integer id;
     private String name;
     private Integer age;
+    private String email;
 
     public PatientDto(Patient patient) {
         this.id = patient.getId();
