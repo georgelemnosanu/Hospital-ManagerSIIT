@@ -1,91 +1,209 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-
-<!--<head>-->
-<!--  <meta charset="utf-8" />-->
-<!--  <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--  <title>#1 HTML Login Form</title>-->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"-->
-<!--        crossorigin="anonymous">-->
-<!--  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">-->
-<!--  <link rel="stylesheet" th:href="@{/static/index.css}">-->
-<!--</head>-->
-
-<!--<body>-->
-<!--<div id="form_wrapper">-->
-<!--  <div id="form_left">-->
-<!--    <img src="icon.png" alt="computer icon">-->
-<!--  </div>-->
-<!--  <div id="form_right">-->
-<!--    <h1>Member Login</h1>-->
-<!--    <div class="input_container">-->
-<!--      <i class="fas fa-envelope"></i>-->
-<!--      <input placeholder="Email" type="email" name="Email" id="field_email" class='input_field'>-->
-<!--    </div>-->
-<!--    <div class="input_container">-->
-<!--      <i class="fas fa-lock"></i>-->
-<!--      <input  placeholder="Password" type="password" name="Password" id="field_password" class='input_field'>-->
-<!--    </div>-->
-<!--    <input type="submit" value="Login" id='input_submit' class='input_field'>-->
-<!--    <span>Forgot <a href="#"> Username / Password ?</a></span>-->
-<!--    <span id='create_account'>-->
-<!--                <a href="#">Create your account &#x27A1; </a>-->
-<!--            </span>-->
-<!--  </div>-->
-<!--</div>-->
-<!--</body>-->
-
-<!--</html>-->
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-          crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://kit.fontawesome.com/0b6a62f049.css" crossorigin="anonymous">
-  <script src="https://kit.fontawesome.com/0b6a62f049.js" crossorigin="anonymous"></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Login Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+            crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/0b6a62f049.css" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/0b6a62f049.js" crossorigin="anonymous"></script>
 
 </head>
-<body>
 
-<div th:if="${successMessage}" class="alert alert-success text-center">
-  <p th:text="${successMessage}"></p>
+<body>
+<div th:if="${successMessage}" class="alert alert-success text-center" style="text-align:center;position: absolute; top: 10px; left: 53%; transform: translateX(-50%); width: 50%; height: 80px; background-color: #1FCC44; color: white; border: none; font-size: 18px;">
+  <p th:text="${successMessage}" style="margin: 0; padding: 10px 0;"></p>
 </div>
-<div class="bg" style="background-image: url('https://www.smartsheet.com/sites/default/files/ic-og-PatientManagement-FacebookLinkedIn.jpg'); background-size: cover; background-position: center center; height: 100vh; width: 100%;">
-  <div class="container h-150 d-flex align-items-center justify-content-center">
-    <form style="margin-top: 200px" class="card p-4" method="post" action="/login">
-      <div class="text-center mb-4">
-        <h1 class="display-4">Hospital Manager</h1>
-        <p class="lead">Please enter your credentials</p>
-      </div>
-      <div class="form-group">
-        <i class="fa fa-user" aria-hidden="true"></i>
-        <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" name="username" required>
-      </div>
-      <div class="form-group">
-        <i class="fa-solid fa-lock"></i>
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-      </div>
-      <div th:if="${param.error}" class="alert alert-danger text-center">
-        Invalid username or password.
-      </div>
-      <div class="d-flex">
-        <button type="submit"  style="margin: auto; display: block; width: 100%" class="btn btn-primary mx-2">Login</button>
-        <button class="btn btn-primary mx-2"  style="margin: auto; display: block; width: 100%" onclick="window.location.href='/mvc/patient/create';">
-          Create a new account
-        </button>
-      </div>
-    </form>
+<form method="post" action="/login">
+<div id="form_wrapper">
+  <div id="form_left">
+    <img src="https://cardiomediasi.ro/wp-content/uploads/cardiologie-cardiomed-1.jpg" alt="computer icon">
+  </div>
+  <div id="form_right">
+    <h1>Patient Login</h1>
+    <div class="input_container">
+      <i class="fas fa-envelope"></i>
+      <input placeholder="Username" type="text" name="username" id="username" class='input_field'>
+    </div>
+    <div class="input_container">
+      <i class="fas fa-lock"></i>
+      <input  placeholder="Password" type="password" name="password" id="password" class='input_field'>
+    </div>
+    <div th:if="${param.error}" class="alert alert-danger text-center">
+      Invalid username or password.
+    </div>
+    <input type="submit" value="Login" id='input_submit' class='input_field'>
+    <span id='create_account'>
+      <a href="/mvc/patient/create">Create your account &#x27A1;</a>
+            </span>
   </div>
 </div>
+</form>
 </body>
+<style>
+
+  :root {
+    --body_gradient_left: #004cd0;
+    --body_gradient_right: #00c8b7;
+    --form_bg: #ffffff;
+    --input_bg: #E5E5E5;
+    --input_hover: #eaeaea;
+    --submit_bg: #0e28e8;
+    --submit_hover: #40a4e2;
+    --icon_color: #6b6b6b;
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 100vh;
+    font-family: 'Roboto',
+    sans-serif;
+    background-image: linear-gradient(to right, var(--body_gradient_left), var(--body_gradient_right));
+    display: flex;
+  }
+
+  .alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  #form_wrapper {
+    width: 1000px;
+    height: 700px;
+    margin-top:100px;
+    margin-left: 500px;
+    background-color: var(--form_bg);
+    border-radius: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5vw;
+    padding: 5vh 15px;
+  }
+
+  #form_left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #form_left img {
+    margin-left: 50px;
+    width: 400px;
+    height: 300px;
+    border-radius: 10px;
+  }
+
+  #form_right {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    padding: 10% 5%;
+  }
+
+  h1,
+  span {
+    text-align: center;
+  }
+
+  .input_container {
+    background-color: var(--input_bg);
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
+
+  .input_container:hover {
+    background-color: var(--input_hover);
+  }
+
+  .input_container,
+  #input_submit {
+    height: 60px;
+    border-radius: 30px;
+    width: 100%;
+  }
+
+  .input_field {
+    color: var(--icon_color);
+    background-color: inherit;
+    width: 90%;
+    border: none;
+    font-size: 1.3rem;
+    font-weight: 400;
+    padding-left: 30px;
+  }
+
+  .input_field:hover,
+  .input_field:focus {
+    outline: none;
+  }
+
+  #input_submit {
+    background-color: var(--submit_bg);
+    padding-left: 0;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  #input_submit:hover {
+    background-color: var(--submit_hover);
+    transition: background-color,
+    1s;
+    cursor: pointer;
+  }
+
+  #create_account {
+    display: block;
+    position: relative;
+    top: 30px;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--submit_bg);
+    font-weight: bold;
+  }
+
+  a:hover {
+    color: var(--submit_hover);
+  }
+
+  i {
+    color: var(--icon_color);
+  }
+
+  @media screen and (max-width:768px) {
+
+    #form_wrapper {
+      grid-template-columns: 1fr;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    #form_left {
+      display: none;
+    }
+  }
+
+</style>
+
 </html>
