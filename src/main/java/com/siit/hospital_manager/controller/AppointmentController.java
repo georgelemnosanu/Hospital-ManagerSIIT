@@ -1,15 +1,19 @@
 package com.siit.hospital_manager.controller;
 
+import com.siit.hospital_manager.config.MyUserDetails;
+import com.siit.hospital_manager.model.Patient;
 import com.siit.hospital_manager.model.Specialty;
 import com.siit.hospital_manager.model.dto.AppointmentDto;
 import com.siit.hospital_manager.model.dto.CreateAppointmentDto;
 import com.siit.hospital_manager.repository.SpecialtyRepository;
 import com.siit.hospital_manager.service.AppointmentService;
 import com.siit.hospital_manager.service.DoctorService;
+import com.siit.hospital_manager.service.EmailSender;
 import com.siit.hospital_manager.service.PatientService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +32,8 @@ public class AppointmentController {
     private final DoctorService doctorService;
     private final PatientService patientService;
     private final SpecialtyRepository specialtyRepository;
+
+    private final EmailSender emailSender;
 
     @GetMapping("/findAllByPatient")
     public String findAllByPatient(Model model, Principal principal) {
@@ -53,7 +59,12 @@ public class AppointmentController {
     }
 
     @PostMapping("/submitCreateAppointmentForm")
-    public String submitCreateAppointmentForm(CreateAppointmentDto createAppointmentDto, BindingResult bindingResult) {
+    public String submitCreateAppointmentForm(CreateAppointmentDto createAppointmentDto, BindingResult bindingResult, Authentication authentication) {
+        MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
+        String username = myUserDetails.getUsername();
+        Patient patient = patientService.findByUsername(username);
+        String userEmail = patient != null ? patient.getEmail() : null;
+        emailSender.sendAppointmentConfirmationEmail(userEmail, "Appointment Confirmation", "Your appointment has been confirmed we wait you at: " +createAppointmentDto.getDate());
         appointmentService.save(createAppointmentDto);
         return "/appointment/appointmentCreatedSuccessfully";
     }

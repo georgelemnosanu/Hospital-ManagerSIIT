@@ -24,6 +24,8 @@ public class CreatePatientDto {
     @NotNull(message = "Phone number can not be null")
     @Pattern(regexp="0[0-9]{9}")
     private String phoneNumber;
+    @NotNull
+    private String email;
 
 
 }

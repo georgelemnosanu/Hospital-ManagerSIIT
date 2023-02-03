@@ -18,6 +18,8 @@ public class Patient extends User{
     private Integer age;
     private String phoneNumber;
 
+    private String email;
+
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     List<Appointment> appointments;
