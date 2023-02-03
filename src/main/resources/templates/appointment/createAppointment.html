@@ -27,7 +27,7 @@
 </nav>
 <div class="w-50 mx-auto content-between-l">
     <br/>
-    <h2>Create a new appointment</h2>
+    <h2 class="h2">Create a new appointment</h2>
     <div>
         <form th:object="${appointment}" th:action="@{/appointment/submitCreateAppointmentForm}" method="post">
             <div class="mb-0 w-75 p-1">
@@ -52,5 +52,24 @@
 
     </div>
 </div>
+<style>
+
+    body {
+        background: linear-gradient(to right, rgba(193, 199, 203, 0.35), #afb5c0);
+        font-family: 'Roboto', sans-serif;
+    }
+
+
+    .h2 {
+        text-align: center;
+        margin-top: 40px;
+        border-radius: 20px;
+        font-weight: bold;
+        width: 50%;
+    }
+
+
+
+</style>
 </body>
 </html>

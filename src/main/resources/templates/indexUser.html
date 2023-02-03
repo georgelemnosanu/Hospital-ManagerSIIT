@@ -26,17 +26,53 @@
 <br>
 <br>
 
-<H2 class="mx-auto, text-center">Available specialties</H2>
+<h2 class="mx-auto, text-center , h2">Available specialties</h2>
 <table class="table table-striped, mx-auto" style="width: 600px;">
     <tbody>
     <tr th:each="specialty : ${specialties}">
         <td class="text-center">
-            <a th:href="@{/specialty/{id}(id=${specialty.id})}" th:text="${specialty.name}"></a>
+            <a th:href="@{/specialty/{id}(id=${specialty.id})}">
+                <div class="img-container">
+                    <img th:src="${specialty.id == 1 ? 'https://imageup.me/images/bdf51083-bc50-4e77-aa53-1c88a0102d55.png' :
+                         specialty.id == 2 ? 'https://imageup.me/images/ea28d8e8-52f1-46c3-8683-0d3a0c8a7ba5.png' :
+                         specialty.id == 3 ? 'https://imageup.me/images/9fcf88d2-711d-41ae-b689-dfd2740bda7a.png' :
+                         specialty.id == 4 ? 'https://imageup.me/images/b1c37ab0-62f2-40f9-b5e1-e2bda8ba64cd.png' :
+                         'default_image_link'}" alt="Specialty Image" width="300" height="250" />
+                </div>
+            </a>
         </td>
     </tr>
     </tbody>
 </table>
+<style>
+    body {
+        background: linear-gradient(to right, rgba(193, 199, 203, 0.35), #afb5c0);
+        font-family: 'Roboto', sans-serif;
+    }
 
+    .h2 {
+        text-align: center;
+        margin-top: 40px;
+        border-radius: 20px;
+        font-weight: bold;
+        width: 50%;
+        margin-left: 25%;
+    }
+    .img-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .img-container img {
+        transition: transform .3s;
+    }
+
+    .img-container:hover img {
+        transform: scale(1.2);
+    }
+
+
+</style>
 
 </body>
 </html>

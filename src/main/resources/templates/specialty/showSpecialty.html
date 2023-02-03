@@ -24,11 +24,30 @@
     </div>
 </nav>
 
-<h2 class="mx-auto, text-center" th:text="${specialty.name}">Specialty Name</h2>
+<h2 class="mx-auto, text-center,h2" th:text="${specialty.name}">Specialty Name</h2>
 <br>
 <p class="mx-auto, text-center" th:text="${specialty.description}"> Description </p>
 <div class="d-flex justify-content-center">
     <a class ="btn btn-primary" th:href="@{/appointment/create/{specialtyId}(specialtyId=${specialty.id})}">Create Appointment</a>
 </div>
+
+<style>
+    body {
+        background: linear-gradient(to right, rgba(193, 199, 203, 0.35), #afb5c0);
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .text-center,h2 {
+        text-align: center;
+        margin-top: 40px;
+        border-radius: 20px;
+        font-weight: bold;
+        width: 50%;
+        margin-left: 25%;
+    }
+
+
+
+</style>
 </body>
 </html>

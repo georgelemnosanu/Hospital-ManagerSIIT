@@ -39,7 +39,6 @@ public class AppointmentController {
     public String findAllByPatient(Model model, Principal principal) {
         List<AppointmentDto> appointments = appointmentService.findAllByUserName(principal.getName());
         model.addAttribute("appointments", appointments);
-
         return "appointment/viewAll";
     }
 
