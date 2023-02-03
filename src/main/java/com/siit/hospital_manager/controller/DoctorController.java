@@ -2,6 +2,7 @@ package com.siit.hospital_manager.controller;
 
 import com.siit.hospital_manager.model.dto.CreateDoctorDto;
 import com.siit.hospital_manager.model.dto.DoctorDto;
+import com.siit.hospital_manager.repository.SpecialtyRepository;
 import com.siit.hospital_manager.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import java.util.List;
 public class DoctorController {
 
     private final DoctorService doctorService;
+    private final SpecialtyRepository specialtyRepository;
 
     @GetMapping("/viewAll")
     public String viewAll(Model model){
@@ -27,6 +29,7 @@ public class DoctorController {
 
     @GetMapping("/createDoctor")
     public String createDoctor(Model model){
+        model.addAttribute("specialities",specialtyRepository.findAll());
         model.addAttribute("doctor", CreateDoctorDto.builder().build());
         return "/doctor/createDoctor";
     }

@@ -54,6 +54,7 @@ public class PatientService {
                 .isActive(true)
                 .roles("ROLE_PATIENT")
                 .phoneNumber(createPatientDto.getPhoneNumber())
+                .email(createPatientDto.getEmail())
                 .build();
         return userRepository.save(patient).getId();
     }

@@ -17,7 +17,6 @@ public class Patient extends User{
     private String name;
     private Integer age;
     private String phoneNumber;
-
     private String email;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY,
