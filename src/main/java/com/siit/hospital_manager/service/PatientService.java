@@ -1,5 +1,6 @@
 package com.siit.hospital_manager.service;
 
+import com.siit.hospital_manager.config.MyUserDetails;
 import com.siit.hospital_manager.exception.BusinessException;
 import com.siit.hospital_manager.model.Patient;
 import com.siit.hospital_manager.model.User;
@@ -9,6 +10,7 @@ import com.siit.hospital_manager.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +48,10 @@ public class PatientService {
                 }
         );
 
-        User patient = Patient.builder()
+
+
+
+        Patient patient = Patient.builder()
                 .userName(createPatientDto.getUserName())
                 .password(passwordEncoder.encode(createPatientDto.getPassword()))
                 .name(createPatientDto.getName())
@@ -54,6 +59,7 @@ public class PatientService {
                 .isActive(true)
                 .roles("ROLE_PATIENT")
                 .phoneNumber(createPatientDto.getPhoneNumber())
+                .email(createPatientDto.getEmail())
                 .build();
         return userRepository.save(patient).getId();
     }

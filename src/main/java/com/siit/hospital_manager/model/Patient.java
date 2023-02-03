@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="patients")
@@ -14,15 +16,18 @@ import java.util.List;
 @RequiredArgsConstructor
 @PrimaryKeyJoinColumn(referencedColumnName = "id")
 public class Patient extends User{
+
     private String name;
+
     private Integer age;
+
     private String phoneNumber;
 
     private String email;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
-    List<Appointment> appointments;
+    private List<Appointment> appointments;
 
 
 }

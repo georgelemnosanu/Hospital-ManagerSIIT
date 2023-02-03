@@ -2,11 +2,13 @@ package com.siit.hospital_manager.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.siit.hospital_manager.model.dto.AppointmentDto;
+import com.siit.hospital_manager.model.dto.Procedure;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Entity
 @Table(name = "appointments")
@@ -35,6 +37,19 @@ public class Appointment {
     @ManyToOne
     @JsonIgnore
     private Specialty specialty;
+
+    @OneToMany
+    private List<Diagnosis> diagnoses;
+
+    @OneToMany
+    private List<Procedure> procedures;
+
+    @OneToMany
+    private List<Medication> medications;
+
+    private String summary;
+
+
 
     public AppointmentDto toDto(){
 

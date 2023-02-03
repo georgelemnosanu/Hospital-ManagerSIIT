@@ -63,7 +63,8 @@ public class AppointmentController {
         String username = myUserDetails.getUsername();
         Patient patient = patientService.findByUsername(username);
         String userEmail = patient != null ? patient.getEmail() : null;
-        emailSender.sendAppointmentConfirmationEmail(userEmail, "Appointment Confirmation", "Your appointment has been confirmed we wait you at: " +createAppointmentDto.getDate());
+        emailSender.sendAppointmentConfirmationEmail(userEmail, "Appointment Confirmation",
+                "Your appointment has been confirmed we wait you at: " + createAppointmentDto.getDate());
         appointmentService.save(createAppointmentDto);
         return "/appointment/appointmentCreatedSuccessfully";
     }
