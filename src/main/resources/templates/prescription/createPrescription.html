@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/prescription/submitCreatePrescription}" th:object="${prescription}" method="post">
+  <div>
+    <label for="diagnosis">Diagnosis:</label>
+    <input type="text" id="diagnosis" name="diagnosis" th:field="*{diagnosis}" required="required"/>
+  </div>
+  <div>
+    <label for="meds">Meds:</label>
+    <select id="meds" name="meds" multiple="multiple">
+      <option th:each="med : ${meds}"
+              th:value="${med.id}"
+              th:text="${med.name}"></option>
+    </select>
+  </div>
+  <div>
+    <label for="procedures">Procedures:</label>
+    <input type="text" id="procedures" name="procedures" th:field="*{procedures}" required="required"/>
+  </div>
+  <input type="submit" value="Save">
+</form>
+</body>
+</html>
