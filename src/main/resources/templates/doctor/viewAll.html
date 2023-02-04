@@ -21,13 +21,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${doctors.empty}">
-        <td colspan="2"> No patients registered </td>
-    </tr>
     <tr th:each="doctor : ${doctors}">
         <td class="doctorId"><span th:text="${doctor.id}"> Id </span></td>
         <td><span th:text="${doctor.name}"> Name </span></td>
-        <td><span th:text="${doctor.specialisation}"> Name </span></td>
+        <td><span th:text="${doctor.specialty}"> Name </span></td>
         <td>
             <button class="delete-doctor-button"> Delete </button>
         </td>
