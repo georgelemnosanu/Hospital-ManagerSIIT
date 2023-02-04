@@ -26,5 +26,6 @@ public class Specialty {
     @JsonIgnore
     private List<Doctor> doctors;
 
+    @Column(length = 1000)
     private String description;
 }

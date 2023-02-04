@@ -3,6 +3,8 @@ package com.siit.hospital_manager.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "diagnoses")
 @Getter
@@ -17,6 +19,9 @@ public class Diagnosis {
     private Integer id;
 
     private String name;
+
+    @ManyToMany(mappedBy = "diagnoses")
+    private List<Appointment> appointments;
 
 
 }
