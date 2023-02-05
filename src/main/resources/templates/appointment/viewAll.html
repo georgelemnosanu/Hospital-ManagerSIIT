@@ -52,7 +52,7 @@
     </tr>
     <tr style="text-align: center" th:each="appointment : ${appointments}">
         <td style="text-align: center" class="appointmentId" th:text="${appointment.id}"> Id</td>
-        <td style="text-align: center" th:text="${appointment.date}"> Name</td>
+        <td style="text-align: center" th:text="${appointment.formattedDate}"> Name</td>
         <td style="text-align: center" th:text="${appointment.doctor.name}"> Name</td>
         <td>
             <button class="btn btn-danger, delete-appointment-button " type="button" onclick="showDeleteConfirmation()">
