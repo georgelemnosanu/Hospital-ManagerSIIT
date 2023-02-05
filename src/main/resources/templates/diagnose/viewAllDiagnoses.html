@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <title>Diagnose List</title>
+</head>
+<body>
+<h2 class="h2">Diagnosis List</h2>
+<div style="width: 90%; overflow-x: auto;">
+  <table class="table" style="width: 40%;">
+    <thead>
+    <tr>
+      <th style="text-align: center">Id</th>
+      <th style="text-align: center">Diagnosis Name</th>
+      <th style="text-align: center">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="text-align: center" th:if="${diagnosis.isEmpty()}">
+      <td colspan="2">No diagnoses yet</td>
+    </tr>
+    <tr style="text-align: center" th:each="diagnosis : ${diagnosis}">
+      <td style="text-align: center" class="diagnosisId" th:text="${diagnosis.id}">Id</td>
+      <td style="text-align: center" th:text="${diagnosis.name}">Diagnosis Name</td>
+      <td>
+        <button class="btn btn-danger delete-diagnosis-button" type="button" onclick="showDeleteConfirmation()">
+          <i class="fas fa-trash-alt"></i> Delete
+        </button>
+      </td>
+    </tr>
+    </tbody>
+    <script>
+      const deleteButtons = document.querySelectorAll('.delete-diagnosis-button');
+      deleteButtons.forEach(function(deleteButton) {
+        deleteButton.addEventListener("click", function() {
+          const diagnosisId = deleteButton.parentNode.parentNode.querySelector(".diagnosisId").textContent;
+          Swal.fire({
+            title: 'Are you sure?',
+            text: 'This action cannot be undone.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Delete',
+            cancelButtonText: 'Cancel'
+          })
+                  .then((willDelete) => {
+                    if (willDelete.value) {
+                      fetch('/diagnose/' + diagnosisId, {
+                        method: 'DELETE'
+                      }).then(function(response) {
+                        if (response.ok) {
+                          window.location.href = '/diagnose/viewAllDiagnoses';
+                          // Display a success alert
+                          Swal.fire("Diagnosis deleted successfully!", {
+                            icon: "success",
+                          });
+                        } else {
+                          // Display an error alert
+                          Swal.fire("Error deleting diagnosis!", {
+                            icon: "error",
+                          });
+                        }
+                      });
+                    }
+                  });
+        });
+      });
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</body>
+</html>

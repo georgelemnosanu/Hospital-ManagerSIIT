@@ -24,4 +24,11 @@ public class Diagnosis {
     private List<Appointment> appointments;
 
 
+    @Override
+    public String toString() {
+        return "Diagnosis{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

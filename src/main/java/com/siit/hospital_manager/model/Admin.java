@@ -1,12 +1,22 @@
 package com.siit.hospital_manager.model;
 
-import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name="admins")
+@Table(name="admin")
+@Data
 @PrimaryKeyJoinColumn(referencedColumnName = "id")
-@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 public class Admin extends User {
+
+
+    public Admin() {
+
+    }
+
 
 }
