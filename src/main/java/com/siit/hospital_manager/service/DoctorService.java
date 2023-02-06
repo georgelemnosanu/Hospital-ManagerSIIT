@@ -8,6 +8,7 @@ import com.siit.hospital_manager.model.dto.DoctorDto;
 import com.siit.hospital_manager.repository.DoctorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DoctorService {
     private final DoctorRepository doctorRepository;
-
+    private final PasswordEncoder passwordEncoder;
     public List<DoctorDto> findAll() {
         return doctorRepository
                 .findAll()
@@ -27,13 +28,24 @@ public class DoctorService {
     }
 
     public void createDoctor(CreateDoctorDto createDoctorDto) {
-        Doctor doctor = Doctor.fromDto(createDoctorDto);
 
         doctorRepository.findByName(createDoctorDto.getName()).ifPresent(doctorInDb -> {
             throw new BusinessException(HttpStatus.BAD_REQUEST, "Doctor already exists!");
         });
+        Doctor doctor =Doctor
+                    .builder()
+                    .userName(createDoctorDto.getUserName())
+                    .name(createDoctorDto.getName())
+                    .specialty(createDoctorDto.getSpecialty())
+                      .password(passwordEncoder.encode(createDoctorDto.getPassword()))
+                    .isActive(true)
+                    .roles("ROLE_DOCTOR")
+                    .build();
         doctorRepository.save(doctor);
-    }
+        }
+
+
+
 
     @Transactional
     public void deleteDoctorById(Integer id) {

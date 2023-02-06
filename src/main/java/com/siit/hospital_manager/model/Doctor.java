@@ -6,6 +6,7 @@ import com.siit.hospital_manager.model.dto.DoctorDto;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -15,7 +16,6 @@ import java.util.List;
 @PrimaryKeyJoinColumn(referencedColumnName = "id")
 @SuperBuilder
 @NoArgsConstructor
-
 public class Doctor extends User{
 
     private String name;
@@ -37,17 +37,6 @@ public class Doctor extends User{
                 .build();
     }
 
-    public static Doctor fromDto(CreateDoctorDto createDoctorDto){
-        return Doctor
-                .builder()
-                .userName(createDoctorDto.getUserName())
-                .name(createDoctorDto.getName())
-                .specialty(createDoctorDto.getSpecialty())
-                .password(createDoctorDto.getPassword())
-                .isActive(true)
-                .roles("ROLE_DOCTOR")
-                .build();
-    }
 
     @Override
     public String toString(){
