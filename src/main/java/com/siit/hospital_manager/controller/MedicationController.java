@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.w3c.dom.stylesheets.LinkStyle;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/medication")
@@ -24,6 +27,7 @@ public class MedicationController {
         model.addAttribute("medications",medicationRepository.findAll());
         return "/medication/viewAllMedication";
     }
+
 
     @GetMapping("/createMedication")
     public String createMedicationView(Model model){
@@ -48,5 +52,9 @@ public class MedicationController {
         medicationService.deleteMedication(id);
     }
 
-
+    @GetMapping("/viewPatientMedication")
+    public String viewPatientMedication(Model model, Integer id){
+        model.addAttribute("patientMedication", medicationService.findById(id));
+        return "/medication/viewPatientMedication";
+    }
 }

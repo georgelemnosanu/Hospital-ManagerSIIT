@@ -12,6 +12,8 @@ import java.util.Optional;
 @Repository
 public interface AppointmentsRepository extends JpaRepository<Appointment, Integer> {
     List<Appointment> findAllByPatientId(Integer id);
+
+    List<Appointment> findAllByDoctorId(Integer id);
     Optional<Appointment> findAppointmentByIdAndPatient(Integer id, Patient patient);
     @Modifying
     @Query(value = "DELETE FROM appointments where id = :id", nativeQuery = true)

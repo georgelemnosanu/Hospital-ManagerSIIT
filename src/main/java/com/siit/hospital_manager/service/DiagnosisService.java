@@ -3,7 +3,9 @@ package com.siit.hospital_manager.service;
 import com.siit.hospital_manager.exception.BusinessException;
 import com.siit.hospital_manager.model.Appointment;
 import com.siit.hospital_manager.model.Diagnosis;
+import com.siit.hospital_manager.model.Medication;
 import com.siit.hospital_manager.repository.DiagnosisRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -34,5 +36,7 @@ public class DiagnosisService {
 
         diagnosisRepository.deleteByIdNativeQuery(diagnosis.getId());
     }
-
+    public Diagnosis findById(Integer diagnosisId){
+        return diagnosisRepository.findById(diagnosisId)
+                .orElseThrow(() -> new EntityNotFoundException("Medication not found"));}
 }

@@ -32,14 +32,19 @@ public class HomePageController {
 
 
     @GetMapping("/default")
-    public String succesPage(HttpServletRequest request){
+    public String successPage(HttpServletRequest request){
         if(request.isUserInRole("ADMIN")){
             return "redirect:/";
-        }
-        else
+        } else if (request.isUserInRole("DOCTOR")) {
+            return "redirect:/indexDoctor";
+        } else
             return "redirect:/indexUser";
-    }
 
+    }
+    @GetMapping("/indexDoctor")
+    public String indexDoctor(Model model){
+        return "indexDoctor";
+    }
 
     @GetMapping("/indexUser")
     public String indexUser(Model model){

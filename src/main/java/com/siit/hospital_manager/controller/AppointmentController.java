@@ -46,6 +46,7 @@ public class AppointmentController {
         return "appointment/viewAll";
     }
 
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteAppointmentById(Model model, @PathVariable Integer id, Principal principal){
@@ -72,4 +73,11 @@ public class AppointmentController {
         appointmentService.save(createAppointmentDto);
         return "/appointment/appointmentCreatedSuccessfully";
     }
+    @GetMapping("/findAllByDoctor")
+    public String findAllByDoctor(Model model, Principal principal){
+        List<AppointmentDto> appointments = appointmentService.findAllByDoctor(principal.getName());
+        model.addAttribute("doctorAppointments", appointments);
+        return "appointment/appointmentView";
+    }
+
 }
