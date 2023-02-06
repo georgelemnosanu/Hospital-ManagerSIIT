@@ -3,44 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <title>Patient list</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <title>Doctor list</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="/">Hospital Manager</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<h2 class="h2">Doctors List</h2>
+<div style="width: 90%; overflow-x: auto;">
+    <table class="table" style="width: 40%;">
+        <thead>
+        <tr>
+            <th style="text-align: center">Id</th>
+            <th style="text-align: center">Name</th>
+            <th style="text-align: center">Speciality</th>
+            <th style="text-align: center">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="text-align: center" th:if="${doctors.isEmpty()}">
+            <td colspan="2">No doctor registered</td>
+        </tr>
+        <tr style="text-align: center" th:each="doctor : ${doctors}">
+            <td style="text-align: center" class="doctorId" th:text="${doctor.id}">Id</td>
+            <td style="text-align: center" th:text="${doctor.name}">Name</td>
+            <td style="text-align: center" th:text="${doctor.specialty}">Speciality</td>
+            <td>
+                <button class="btn btn-danger delete-doctor-button" type="button" onclick="showDeleteConfirmation()">
+                    <i class="fas fa-trash-alt"></i> Delete
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
-<h2> Doctors list</h2>
 
-<!--<table border="1" class="table table-striped">-->
+<style>
 
-<table class="table table-striped-columns">
-    <thead>
-    <tr>
-        <th> Id </th>
-        <th> Name </th>
-        <th> Specialisation </th>
-        <th> Delete </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="doctor : ${doctors}">
-        <td class="doctorId"><span th:text="${doctor.id}"> Id </span></td>
-        <td><span th:text="${doctor.name}"> Name </span></td>
-        <td><span th:text="${doctor.specialty}"> Name </span></td>
-        <td>
-            <button class="delete-doctor-button"> Delete </button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    body {
+        background: linear-gradient(to right, rgba(193, 199, 203, 0.35), #afb5c0);
+        font-family: 'Roboto', sans-serif;
+    }
+    .table {
+        background: #dddddd;
+    }
 
-<p></p>
+    .h2 {
+        text-align: center;
+        margin-top: 40px;
+        border-radius: 20px;
+        font-weight: bold;
+        width: 50%;
+        margin-left: 25%;
+    }
 
-<button onclick="window.location.href='/dashboard';">
-    Dashboard
-</button>
+    .table {
+        margin-top: 25px;
+        margin-left: 65vh;
+        border: 1px solid #ffffff;
+        border-collapse: collapse;
+    }
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+
+
+</style>
 
 <script>
     const deleteButtons = document.querySelectorAll('.delete-doctor-button');

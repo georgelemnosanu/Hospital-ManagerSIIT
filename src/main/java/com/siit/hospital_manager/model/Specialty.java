@@ -28,4 +28,10 @@ public class Specialty {
 
     @Column(length = 1000)
     private String description;
+
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
