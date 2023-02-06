@@ -6,6 +6,7 @@ import com.siit.hospital_manager.model.Specialty;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -19,5 +20,10 @@ public class AppointmentDto {
     private Patient patient;
     private Doctor doctor;
     private Specialty specialty;
+
+    public String getFormattedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return date.format(formatter);
+    }
 
 }

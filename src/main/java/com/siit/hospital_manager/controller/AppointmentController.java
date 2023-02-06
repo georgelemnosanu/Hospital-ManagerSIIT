@@ -1,10 +1,12 @@
 package com.siit.hospital_manager.controller;
 
 import com.siit.hospital_manager.config.MyUserDetails;
+import com.siit.hospital_manager.model.Medication;
 import com.siit.hospital_manager.model.Patient;
 import com.siit.hospital_manager.model.Specialty;
 import com.siit.hospital_manager.model.dto.AppointmentDto;
 import com.siit.hospital_manager.model.dto.CreateAppointmentDto;
+import com.siit.hospital_manager.repository.MedicationRepository;
 import com.siit.hospital_manager.repository.SpecialtyRepository;
 import com.siit.hospital_manager.service.AppointmentService;
 import com.siit.hospital_manager.service.DoctorService;
@@ -20,6 +22,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller

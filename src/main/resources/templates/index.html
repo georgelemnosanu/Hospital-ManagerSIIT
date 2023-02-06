@@ -24,10 +24,34 @@
             <h1 class="display-4">Welcome to Hospital Manager</h1>
             <h2 class="display-4">Admin</h2>
             <hr class="my-4">
+            <div class="d-flex1 justify-content-between">
+                <a class="btn btn-primary btn-lg mb-2" href="/admin/createAdmin" role="button">Create Admin User</a>
+            </div>
+            <div class="d-flex2 justify-content-between">
+                <a class="btn btn-primary btn-lg mb-1" style="text-align: center ; background: #00c8b7" href="/diagnose/createDiagnose" role="button">Create Diagnose</a>
+                <a class="btn btn-primary btn-lg mb-1" style="text-align: center; background: #00c8b7; border: none;" href="/diagnose/viewAllDiagnoses" role="button">View All Diagnoses</a>            </div>
+            <div class="d-flex3 justify-content-between">
+                <a class="btn btn-primary btn-lg mb-2" style="text-align: center ; background: #2e6da4" href="/procedure/createProcedure" role="button">Create Procedure</a>
+                <a class="btn btn-primary btn-lg mb-2" style="text-align: center ; background: #2e6da4" href="/procedure/viewAllProcedure" role="button">View All Procedures</a>
+            </div>
+            <div class="d-flex4 justify-content-between">
+                <a class="btn btn-primary btn-lg mb-2" style="text-align: center ; background: #31b0d5" href="/medication/createMedication" role="button">Create Medication</a>
+                <a class="btn btn-primary btn-lg mb-2" style="text-align: center ; background: #31b0d5" href="/medication/viewAllMedication" role="button">View All Medications</a>
+            </div>
         </div>
     </div>
 </div>
+<style>
+    .btn {
+        border: none;
+    }
 
+    a.btn:hover {
+        background-color: #00b7c8;
+        color: white;
+    }
+
+</style>
 
 </body>
 </html>
