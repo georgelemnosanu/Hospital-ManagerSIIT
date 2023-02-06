@@ -16,6 +16,24 @@
   <title>Diagnose List</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-light bg-light">
+  <a class="navbar-brand" href="/">Hospital Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Log Out</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <h2 class="h2">Diagnosis List</h2>
 <div style="width: 90%; overflow-x: auto;">
   <table class="table" style="width: 40%;">
@@ -40,6 +58,8 @@
       </td>
     </tr>
     </tbody>
+  </table>
+</div>
     <script>
       const deleteButtons = document.querySelectorAll('.delete-diagnosis-button');
       deleteButtons.forEach(function(deleteButton) {
@@ -88,6 +108,35 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <style>
+
+      body {
+        background: linear-gradient(to right, rgba(193, 199, 203, 0.35), #afb5c0);
+        font-family: 'Roboto', sans-serif;
+      }
+      .table {
+        background: #dddddd;
+      }
+
+      .h2 {
+        text-align: center;
+        margin-top: 40px;
+        border-radius: 20px;
+        font-weight: bold;
+        width: 50%;
+        margin-left: 25%;
+      }
+
+      .table {
+        margin-top: 25px;
+        margin-left: 65vh;
+        border: 1px solid #ffffff;
+        border-collapse: collapse;
+      }
+
+
+
+    </style>
 
 </body>
 </html>
