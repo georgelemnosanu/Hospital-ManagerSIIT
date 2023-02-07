@@ -2,6 +2,7 @@ package com.siit.hospital_manager.controller;
 
 import com.siit.hospital_manager.model.Diagnosis;
 import com.siit.hospital_manager.repository.DiagnosisRepository;
+import com.siit.hospital_manager.repository.PatientRepository;
 import com.siit.hospital_manager.service.DiagnosisService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -21,6 +23,7 @@ public class DiagnosisController {
 
    private final DiagnosisRepository diagnosisRepository;
    private final DiagnosisService diagnosisService;
+    private final PatientRepository patientRepository;
 
     @GetMapping("/viewAllDiagnoses")
     public String viewDiagnoses(Model model){
@@ -30,7 +33,7 @@ public class DiagnosisController {
     }
 
     @GetMapping("/createDiagnose")
-    public String createDiagonoseView(Model model){
+    public String createDiagnoseView(Model model){
         model.addAttribute("diagnose", new Diagnosis());
         return "/diagnose/createDiagnose";
     }
@@ -52,6 +55,10 @@ public class DiagnosisController {
       diagnosisService.deleteDiagnose(id);
       }
 
-
+    @GetMapping("/viewPatientDiagnosis")
+    public String viewPatientDiagnosis(Model model, @PathVariable Integer id){
+        model.addAttribute("patientDiagnosis", diagnosisService.findById(id));
+        return "/diagnose/viewPatientDiagnosis";
+    }
 
 }

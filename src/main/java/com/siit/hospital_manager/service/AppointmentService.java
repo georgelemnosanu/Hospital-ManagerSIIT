@@ -50,6 +50,15 @@ public class AppointmentService {
                 .toList();
     }
 
+    public List<AppointmentDto> findAllByDoctor(String userName){
+        User doctor = userRepository.findByUserName(userName).orElseThrow(
+                () -> new BusinessException(HttpStatus.NOT_FOUND, "User not found"));
+    List<Appointment> appointments = appointmentsRepository.findAllByDoctorId(doctor.getId());
+    return appointments.stream()
+            .map(Appointment::toDto)
+            .toList();
+
+    }
     @Transactional
     public void deleteAppointmentByIdAndPatient(Integer id, String userName) {
         Patient patient = patientRepository.findByUserName(userName).orElseThrow(

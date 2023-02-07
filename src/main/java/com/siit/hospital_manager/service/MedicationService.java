@@ -3,11 +3,14 @@ package com.siit.hospital_manager.service;
 import com.siit.hospital_manager.exception.BusinessException;
 import com.siit.hospital_manager.model.Medication;
 import com.siit.hospital_manager.repository.MedicationRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,5 +34,10 @@ public class MedicationService {
         medicationRepository.deleteByIdNativeQuery(medication.getId());
     }
 
+    public Medication findById(Integer medicationId){
+       return medicationRepository.findById(medicationId)
+                .orElseThrow(() -> new EntityNotFoundException("Medication not found"));
+
+    }
 
 }
