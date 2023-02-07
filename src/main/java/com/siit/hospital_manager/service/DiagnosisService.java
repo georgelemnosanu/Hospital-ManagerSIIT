@@ -13,13 +13,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class DiagnosisService {
 
-    public final DiagnosisRepository diagnosisRepository;
+    private final DiagnosisRepository diagnosisRepository;
+
     public void createDiagnose(String name){
         diagnosisRepository.findByName(name).ifPresent(diagnosis -> { throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Diagnose Already Exist");
         });
@@ -39,4 +41,8 @@ public class DiagnosisService {
     public Diagnosis findById(Integer diagnosisId){
         return diagnosisRepository.findById(diagnosisId)
                 .orElseThrow(() -> new EntityNotFoundException("Medication not found"));}
+
+    public List<Diagnosis> findAll(){
+        return diagnosisRepository.findAll();
+    }
 }

@@ -40,4 +40,7 @@ public class MedicationService {
 
     }
 
+    public List<Medication> findAll() {
+        return medicationRepository.findAll();
+    }
 }

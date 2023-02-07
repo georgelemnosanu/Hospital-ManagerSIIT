@@ -1,17 +1,14 @@
 package com.siit.hospital_manager.controller;
 
 import com.siit.hospital_manager.config.MyUserDetails;
-import com.siit.hospital_manager.model.Medication;
+import com.siit.hospital_manager.model.Appointment;
+import com.siit.hospital_manager.model.Diagnosis;
 import com.siit.hospital_manager.model.Patient;
 import com.siit.hospital_manager.model.Specialty;
 import com.siit.hospital_manager.model.dto.AppointmentDto;
 import com.siit.hospital_manager.model.dto.CreateAppointmentDto;
-import com.siit.hospital_manager.repository.MedicationRepository;
 import com.siit.hospital_manager.repository.SpecialtyRepository;
-import com.siit.hospital_manager.service.AppointmentService;
-import com.siit.hospital_manager.service.DoctorService;
-import com.siit.hospital_manager.service.EmailSender;
-import com.siit.hospital_manager.service.PatientService;
+import com.siit.hospital_manager.service.*;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,8 +19,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -36,6 +31,9 @@ public class AppointmentController {
     private final DoctorService doctorService;
     private final PatientService patientService;
     private final SpecialtyRepository specialtyRepository;
+    private final DiagnosisService diagnosisService;
+    private final ProcedureService procedureService;
+    private final MedicationService medicationService;
 
     private final EmailSender emailSender;
 
@@ -77,7 +75,23 @@ public class AppointmentController {
     public String findAllByDoctor(Model model, Principal principal){
         List<AppointmentDto> appointments = appointmentService.findAllByDoctor(principal.getName());
         model.addAttribute("doctorAppointments", appointments);
-        return "appointment/appointmentView";
+        return "/appointment/viewAppointmentsByDoctor";
+    }
+
+    @GetMapping("/{appointmentId}")
+    public String showAppointment(@PathVariable Integer appointmentId, Model model) {
+            model.addAttribute("appointment", appointmentService.findById(appointmentId));
+            model.addAttribute("appointmentDiagnoses", appointmentService.findById(appointmentId).getDiagnoses());
+            model.addAttribute("availableDiagnoses", diagnosisService.findAll());
+        return  "appointment/viewAppointment";
+    }
+
+    @PostMapping("/{appointmentId}/diagnoses")
+    public String addDiagnosisToAppointment(@ModelAttribute Diagnosis diagnosis,  @PathVariable Integer appointmentId) {
+        Appointment appointment = appointmentService.findById(appointmentId);
+        appointment.addDiagnosis(diagnosis);
+        appointmentService.save(appointment);
+        return "redirect:/appointment/" + appointmentId;
     }
 
 }

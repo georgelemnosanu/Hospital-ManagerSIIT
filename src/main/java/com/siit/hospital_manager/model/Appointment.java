@@ -6,7 +6,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "appointments")
@@ -40,7 +43,7 @@ public class Appointment {
     @JoinTable(name = "appointment_diagnosis",
             joinColumns = @JoinColumn(name = "appointment_id"),
             inverseJoinColumns = @JoinColumn(name = "diagnosis_id"))
-    private List<Diagnosis> diagnoses;
+    private Set<Diagnosis> diagnoses;
 
     @ManyToMany
     @JoinTable(
@@ -69,5 +72,12 @@ public class Appointment {
                 .patient(patient)
                 .doctor(doctor)
                 .build();
+    }
+
+    public void addDiagnosis(Diagnosis diagnosis) {
+        if (this.diagnoses == null) {
+            this.diagnoses = new HashSet<>();
+        }
+        this.diagnoses.add(diagnosis);
     }
 }
