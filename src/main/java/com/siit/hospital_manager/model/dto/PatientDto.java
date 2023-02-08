@@ -35,15 +35,26 @@ public class PatientDto {
         this.email = email;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     private Integer id;
     private String name;
     private Integer age;
     private String email;
+    private String phoneNumber;
 
     public PatientDto(Patient patient) {
         this.id = patient.getId();
         this.name = patient.getName();
         this.age = patient.getAge();
+        this.phoneNumber= patient.getPhoneNumber();
+        this.email= patient.getEmail();
     }
 
 }

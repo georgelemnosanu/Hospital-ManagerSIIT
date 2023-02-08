@@ -2,6 +2,7 @@ package com.siit.hospital_manager.service;
 
 import com.siit.hospital_manager.config.MyUserDetails;
 import com.siit.hospital_manager.exception.BusinessException;
+import com.siit.hospital_manager.model.Doctor;
 import com.siit.hospital_manager.model.Patient;
 import com.siit.hospital_manager.model.User;
 import com.siit.hospital_manager.model.dto.*;
@@ -80,5 +81,11 @@ public class PatientService {
                 .orElseThrow(() -> new EntityNotFoundException("Patient not found"));
     }
 
-    // same for delete
+    @Transactional
+    public void deletePatientById(Integer id) {
+        Patient patient = patientRepository.findById(id).orElseThrow(
+                () -> new BusinessException(HttpStatus.NOT_FOUND, "Invalid doctor id"));
+       patientRepository.delete(patient);
+    }
+
 }

@@ -77,44 +77,6 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 
-<!--<script>-->
-<!--    const deleteButtons = document.querySelectorAll('.delete-appointment-button');-->
-<!--    deleteButtons.forEach(function(deleteButton) {-->
-<!--        deleteButton.addEventListener("click", function() {-->
-<!--            const appointmentId = deleteButton.parentNode.parentNode.querySelector(".appointmentId").textContent;-->
-<!--            Swal.fire({-->
-<!--                title: 'Are you sure?',-->
-<!--                text: 'This action cannot be undone.',-->
-<!--                icon: 'warning',-->
-<!--                showCancelButton: true,-->
-<!--                confirmButtonColor: '#d33',-->
-<!--                cancelButtonColor: '#3085d6',-->
-<!--                confirmButtonText: 'Delete',-->
-<!--                cancelButtonText: 'Cancel'-->
-<!--            })-->
-<!--                .then((willDelete) => {-->
-<!--                    if (willDelete.value) {-->
-<!--                        fetch('/appointment/' + appointmentId, {-->
-<!--                            method: 'DELETE'-->
-<!--                        }).then(function(response) {-->
-<!--                            if (response.ok) {-->
-<!--                                location.reload();-->
-<!--                                // Display a success alert-->
-<!--                                Swal.fire("Appointment deleted successfully!", {-->
-<!--                                    icon: "success",-->
-<!--                                });-->
-<!--                            } else {-->
-<!--                                // Display an error alert-->
-<!--                                Swal.fire("Error deleting appointment!", {-->
-<!--                                    icon: "error",-->
-<!--                                });-->
-<!--                            }-->
-<!--                        });-->
-<!--                    }-->
-<!--                });-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
 
 <style>
 
@@ -124,14 +86,6 @@
     }
     .table {
         background: #dddddd;
-    }
-<!--    .delete-appointment-button {-->
-<!--        background-color: rgba(211, 23, 23, 0.74);-->
-<!--       text-color: white;-->
-<!--        color: white;-->
-<!--    }-->
-    .delete-appointment-button:hover{
-        background-color: #d00010;
     }
 
       .h2 {
@@ -155,6 +109,5 @@
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </body>
 </html>
