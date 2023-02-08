@@ -3,6 +3,7 @@ package com.siit.hospital_manager.service;
 import com.siit.hospital_manager.exception.BusinessException;
 import com.siit.hospital_manager.model.Procedure;
 import com.siit.hospital_manager.repository.ProcedureRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,10 @@ public class ProcedureService {
 
     public List<Procedure> findAll() {
         return procedureRepository.findAll();
+    }
+
+    public Procedure findById(Integer procedureId) {
+        return procedureRepository.findById(procedureId)
+                .orElseThrow(()-> new EntityNotFoundException("Procedure not found"));
     }
 }

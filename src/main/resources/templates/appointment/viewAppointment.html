@@ -47,30 +47,120 @@
         </tr>
         <tr>
             <td>
-                <p>Diagnoses:</p>
-                <ul th:each="diagnosis : ${appointment.diagnoses}">
-                    <li th:text="${diagnosis.name}"></li>
-                </ul>
+                <table>
+                    <tr>
+                        <td>Patient diagnoses:</td>
+                    </tr>
+                    <tr th:each="diagnosis : ${appointment.diagnoses}">
+                        <td th:text="${diagnosis.name}"></td>
+                        <td>
+                            <form th:action="@{/appointment/{appointmentId}/diagnoses/{diagnosisId}/delete(appointmentId=${appointmentId}, diagnosisId=${diagnosis.id})}" th:method="post" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-block">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
             </td>
-            <td>
-                <form th:action="@{/appointment/{appointmentId}/diagnoses(appointmentId=${appointmentId})}" method="post">
-                    <select name="diagnosis">
-                        <option th:each="diagnosis : ${availableDiagnoses}" th:value="${diagnosis.id}" th:text="${diagnosis.name}"></option>
-                    </select>
-                    <button type="submit" class="btn btn-info">Add Diagnosis</button>
-                </form>
         </tr>
-    <tr>
-        <td>
-            <p>Procedures:</p>
-        </td>
-        <td></td>
-    </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td>Add new diagnoses</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form th:action="@{/appointment/{appointmentId}/diagnoses(appointmentId=${appointmentId})}" method="post">
+                                <select name="diagnosis">
+                                    <option th:each="diagnosis : ${availableDiagnoses}" th:value="${diagnosis.id}" th:text="${diagnosis.name}"></option>
+                                </select>
+                                <button type="submit" class="btn btn-info">Add Diagnosis</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Procedures:</p>
+            </td>
+        </tr>
+        <tr th:each="procedure : ${appointment.procedures}">
+            <td th:text="${procedure.name}"></td>
+            <td>
+                <form th:action="@{/appointment/{appointmentId}/procedures/{procedureId}/delete(appointmentId=${appointmentId}, procedureId=${procedure.id})}" th:method="post" class="d-inline">
+                    <button type="submit" class="btn btn-danger btn-block">Remove</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td>Add new procedures:</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form th:action="@{/appointment/{appointmentId}/procedures(appointmentId=${appointmentId})}" method="post">
+                                <select name="procedure">
+                                    <option th:each="procedure : ${availableProcedures}" th:value="${procedure.id}" th:text="${procedure.name}"></option>
+                                </select>
+                                <button type="submit" class="btn btn-info">Add Procedure</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Medication:</p>
+            </td>
+        </tr>
+        <tr th:each="medication : ${appointment.medications}">
+            <td th:text="${medication.name}"></td>
+            <td>
+                <form th:action="@{/appointment/{appointmentId}/medications/{medicationId}/delete(appointmentId=${appointmentId}, medicationId=${medication.id})}" th:method="post" class="d-inline">
+                    <button type="submit" class="btn btn-danger btn-block">Remove</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td>Add new medication:</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form th:action="@{/appointment/{appointmentId}/medications(appointmentId=${appointmentId})}" method="post">
+                                <select name="medication">
+                                    <option th:each="medication : ${availableMedications}" th:value="${medication.id}" th:text="${medication.name}"></option>
+                                </select>
+                                <button type="submit" class="btn btn-info">Add Medication</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="#" th:action="@{/appointment/{appointmentId}/save(appointmentId=${appointmentId})}" method="post">
+                    <div class="form-group">
+                        <label for="summary">Summary</label>
+                        <textarea class="form-control" id="summary" th:field="*{appointment.summary}" rows="15">
+
+                        </textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </td>
+        </tr>
     </tbody>
 </table>
-
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
