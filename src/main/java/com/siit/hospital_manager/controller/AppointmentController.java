@@ -41,6 +41,16 @@ public class AppointmentController {
         return "appointment/viewAll";
     }
 
+    @GetMapping("/appointmentDetails/{apId}")
+    public String findAllDetailsByPatient(@PathVariable Integer apId,Model model) {
+        model.addAttribute("appointment", appointmentService.findById(apId));
+        model.addAttribute("appointmentDiagnoses", appointmentService.findById(apId).getDiagnoses());
+        model.addAttribute("appointmentProcedures", appointmentService.findById(apId).getProcedures());
+        model.addAttribute("appointmentMedications", appointmentService.findById(apId).getMedications());
+        return "/appointment/appointmentDetails/appointmentsDetails";
+    }
+
+
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -142,7 +152,6 @@ public class AppointmentController {
         Appointment appointment = appointmentService.findById(appointmentId);
         appointment.setSummary(editedAppointment.getSummary());
         appointmentService.save(appointment);
-
         return "redirect:/appointment/findAllByDoctor";
     }
 

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"
+            integrity="sha256-srhz/t0GOrmVGZryG24MVDyFDYZpvUH2+dnJ8FbpGi0=" crossorigin="anonymous"></script>
+    <title>Appointment Details</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="#">Hospital Manager</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="/indexUser">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/appointment/findAllByPatient">View my appointments</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+<div class="wrapper">
+    <div class="prescription_form">
+        <table class="prescription" data-prescription_id="<?php echo $presc->prescription_id; ?>" border="1">
+            <tbody>
+            <tr height="15%">
+                <td colspan="2">
+                    <div class="header">
+                        <div class="logo">
+                            <img
+                                    src="https://seeklogo.com/images/H/hospital-clinic-plus-logo-7916383C7A-seeklogo.com.png" />
+                        </div>
+                        <div class="credentials">
+                            <h4 th:text="'Doctor Name:' + ${appointment.doctor.name}">Doctor Name:</h4>
+                            </br>
+                            <h4 th:text="'Patient name:' + ${appointment.patient.name}">Patient Name:</h4>
+                            </br>
+                            <h4 th:text="'Patient age:' + ${appointment.patient.age}"> Patient Age:</h4>
+                            <br />
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td width="40%">
+                    <div class="desease_details">
+                        <div class="symptoms">
+                            <h4 class="d-header">Diagnoses</h4>
+                                <li style="padding: 0" th:each="diagnosis:${appointment.diagnoses}" th:text="${diagnosis.name}">
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tests">
+                            <h4 class="d-header">Procedures</h4>
+                            <li th:each="procedure : ${appointment.procedures} " th:text="${procedure.name}">
+                        </div>
+                        <div class="advice">
+                            <h4 class="d-header">Medication</h4>
+                            <li th:each="medicine : ${appointment.medications} " th:text="${medicine.name}">
+                        </div>
+                    </div>
+                </td>
+                <td width="60%" valign="top">
+                    <span style="font-size: 3em;">Summary</span>
+                    <hr />
+                        <h4 class="form-control" id="summary" th:text="*{appointment.summary}"></h4>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<style>
+
+    body {
+        font-size: 1.5rem;
+    }
+    .navbar-brand{
+        font-size: 2rem;
+        justify-content: center;
+    }
+    .form-control{
+        font-size: 1.5rem;
+    }
+    .wrapper {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        background: red;
+        margin: 50px;
+    }
+    .prescription_form {
+        width: 100%;
+        height: 100vh;
+
+        background: white;
+    }
+    .prescription {
+        width: 720px;
+        height: 960px;
+        margin: 0 auto;
+        border: 1px solid lightgrey;
+    }
+    .prescription tr > td {
+        padding: 15px;
+    }
+    .header {
+        color: #333;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .logo {
+        flex: 1;
+    }
+    .logo img {
+        width: 120px;
+        height: 120px;
+        float: left;
+    }
+    .credentials {
+        flex: 1;
+    }
+    .credentials h4 {
+        line-height: 1em;
+        letter-spacing: 1px;
+        font-weight: 700;
+        margin: 0px;
+        padding: 0px;
+    }
+    .credentials p {
+        margin: 0 0 5px 0;
+        padding: 3px 0px;
+    }
+    .credentials small {
+        margin: 0;
+        padding: 0;
+        letter-spacing: 1px;
+        padding-right: 80px;
+    }
+    .d-header {
+        width: 100%;
+        text-align: center;
+        background: mediumseagreen;
+        padding: 5px;
+        color: white;
+        font-weight: 800;
+    }
+    .symptoms,
+    .tests,
+    .advice {
+        display: compact;
+        flex-direction: row-reverse;
+        flex: 0px;
+        padding: 0 0 0 10px;
+    }
+
+    .advice p {
+        letter-spacing: 0;
+        font-size: 25px;
+    }
+    .advice .adv_text {
+        flex-grow: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .desease_details {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+</style>
+
+</body>
+</html>
+

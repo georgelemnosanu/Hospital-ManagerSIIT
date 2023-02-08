@@ -5,6 +5,7 @@ import com.siit.hospital_manager.model.dto.PatientDto;
 import com.siit.hospital_manager.service.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,5 +48,11 @@ public class PatientMvcController {
         redirectAttributes.addFlashAttribute("successMessage", "Account created successfully");
         return "redirect:/login";
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void deletePatientById(Model model, @PathVariable Integer id){
+       patientService.deletePatientById(id);
+    }
+
 
 }
