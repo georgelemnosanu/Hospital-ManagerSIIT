@@ -6,6 +6,7 @@ import com.siit.hospital_manager.model.*;
 import com.siit.hospital_manager.model.dto.AppointmentDto;
 import com.siit.hospital_manager.model.dto.CreateAppointmentDto;
 import com.siit.hospital_manager.repository.*;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -87,5 +88,14 @@ public class AppointmentService {
                 .build();
 
         appointmentsRepository.save(appointment);
+    }
+
+    public Appointment findById(Integer appointmentId) {
+        return appointmentsRepository.findById(appointmentId)
+                .orElseThrow(() -> new EntityNotFoundException("Appointment not found"));
+    }
+
+    public void save(Appointment appointment) {
+         appointmentsRepository.save(appointment);
     }
 }

@@ -6,7 +6,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "appointments")
@@ -40,7 +43,7 @@ public class Appointment {
     @JoinTable(name = "appointment_diagnosis",
             joinColumns = @JoinColumn(name = "appointment_id"),
             inverseJoinColumns = @JoinColumn(name = "diagnosis_id"))
-    private List<Diagnosis> diagnoses;
+    private Set<Diagnosis> diagnoses;
 
     @ManyToMany
     @JoinTable(
@@ -48,7 +51,7 @@ public class Appointment {
             joinColumns = @JoinColumn(name = "appointment_id"),
             inverseJoinColumns = @JoinColumn(name = "procedure_id")
     )
-    private List<Procedure> procedures;
+    private Set<Procedure> procedures;
 
     @ManyToMany
     @JoinTable(
@@ -56,7 +59,7 @@ public class Appointment {
             joinColumns = @JoinColumn(name = "appointment_id"),
             inverseJoinColumns = @JoinColumn(name = "medication_id")
     )
-    private List<Medication> medications;
+    private Set<Medication> medications;
 
     private String summary;
 
@@ -69,5 +72,26 @@ public class Appointment {
                 .patient(patient)
                 .doctor(doctor)
                 .build();
+    }
+
+    public void addDiagnosis(Diagnosis diagnosis) {
+        if (this.diagnoses == null) {
+            this.diagnoses = new HashSet<>();
+        }
+        this.diagnoses.add(diagnosis);
+    }
+
+    public void addProcedure(Procedure procedure) {
+        if (this.procedures == null) {
+            this.procedures = new HashSet<>();
+        }
+        this.procedures.add(procedure);
+    }
+
+    public void addMedication(Medication medication){
+        if (this.medications == null) {
+            this.medications = new HashSet<>();
+        }
+        this.medications.add(medication);
     }
 }
