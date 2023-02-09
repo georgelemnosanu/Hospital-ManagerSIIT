@@ -34,11 +34,11 @@ public class AppointmentController {
 
     private final EmailSender emailSender;
 
-    @GetMapping("/findAllByPatient")
+    @GetMapping("/viewAllPatientAppointments")
     public String findAllByPatient(Model model, Principal principal) {
         List<AppointmentDto> appointments = appointmentService.findAllByUserName(principal.getName());
         model.addAttribute("appointments", appointments);
-        return "appointment/viewAll";
+        return "appointment/viewAllPatientAppointments";
     }
 
     @GetMapping("/appointmentDetails/{apId}")
@@ -58,7 +58,7 @@ public class AppointmentController {
          appointmentService.deleteAppointmentByIdAndPatient(id, principal.getName());
     }
 
-    @GetMapping("/create/{specialtyId}")
+    @GetMapping("/createAppointment/{specialtyId}")
     public String showCreateSpecialtyForm(@PathVariable Integer specialtyId, Model model) {
         Specialty specialty = specialtyRepository.findById(specialtyId)
                 .orElseThrow(() -> new EntityNotFoundException("Specialty not found"));
@@ -78,7 +78,7 @@ public class AppointmentController {
         appointmentService.save(createAppointmentDto);
         return "/appointment/appointmentCreatedSuccessfully";
     }
-    @GetMapping("/findAllByDoctor")
+    @GetMapping("/viewAppointmentsByDoctor")
     public String findAllByDoctor(Model model, Principal principal){
         List<AppointmentDto> appointments = appointmentService.findAllByDoctor(principal.getName());
         model.addAttribute("doctorAppointments", appointments);
