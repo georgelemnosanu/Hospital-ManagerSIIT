@@ -152,7 +152,7 @@ public class AppointmentController {
         Appointment appointment = appointmentService.findById(appointmentId);
         appointment.setSummary(editedAppointment.getSummary());
         appointmentService.save(appointment);
-        return "redirect:/appointment/findAllByDoctor";
+        return "redirect:/appointment/viewAppointmentsByDoctor";
     }
 
 }
