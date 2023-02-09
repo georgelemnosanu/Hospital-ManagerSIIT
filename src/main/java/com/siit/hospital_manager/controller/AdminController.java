@@ -41,9 +41,9 @@ public class AdminController {
        try {
            adminService.createAdmin(createAdminDto);
        }catch (ResponseStatusException e){
-           return "/entityExistsError";
+           return "entityExistsError";
        }
-        return "/index";
+        return "index";
     }
 
     @DeleteMapping("/{id}")

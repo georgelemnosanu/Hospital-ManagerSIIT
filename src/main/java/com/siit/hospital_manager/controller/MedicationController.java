@@ -25,14 +25,14 @@ public class MedicationController {
     @GetMapping("/viewAllMedication")
     public String viewAllMedication(Model model){
         model.addAttribute("medications",medicationRepository.findAll());
-        return "/medication/viewAllMedication";
+        return "medication/viewAllMedication";
     }
 
 
     @GetMapping("/createMedication")
     public String createMedicationView(Model model){
         model.addAttribute("medication",new Medication());
-        return"/medication/createMedication";
+        return"medication/createMedication";
     }
 
 
@@ -42,7 +42,7 @@ public class MedicationController {
             medicationService.createMedication(name);
             return"redirect:/medication/viewAllMedication";
         }catch (ResponseStatusException e){
-            return "/entityExistsError";
+            return "entityExistsError";
         }
     }
 
@@ -55,6 +55,6 @@ public class MedicationController {
     @GetMapping("/viewPatientMedication")
     public String viewPatientMedication(Model model, Integer id){
         model.addAttribute("patientMedication", medicationService.findById(id));
-        return "/medication/viewPatientMedication";
+        return "medication/viewPatientMedication";
     }
 }

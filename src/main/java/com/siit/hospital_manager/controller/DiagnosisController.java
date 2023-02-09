@@ -58,7 +58,7 @@ public class DiagnosisController {
     @GetMapping("/viewPatientDiagnosis")
     public String viewPatientDiagnosis(Model model, @PathVariable Integer id){
         model.addAttribute("patientDiagnosis", diagnosisService.findById(id));
-        return "/diagnose/viewPatientDiagnosis";
+        return "diagnose/viewPatientDiagnosis";
     }
 
 }

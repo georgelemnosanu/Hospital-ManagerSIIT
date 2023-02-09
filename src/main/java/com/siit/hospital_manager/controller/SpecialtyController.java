@@ -22,7 +22,7 @@ public class SpecialtyController {
     @GetMapping("/{specialtyId}")
     public String showSpecialtyPage(@PathVariable Integer specialtyId, Model model) {
         model.addAttribute("specialty", specialtyService.findById(specialtyId));
-        return "/specialty/showSpecialty";
+        return "specialty/showSpecialty";
     }
 
 }
